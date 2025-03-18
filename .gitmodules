@@ -1,0 +1,4 @@
+[submodule "thor"]
+	path = thor
+	url = git@github.com:vechain/hayabusa.git
+	branch = release/hayabusa
