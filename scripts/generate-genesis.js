@@ -51,6 +51,25 @@ const main = async () => {
     genesis.forkConfig[config] = blockNumber;
   }
 
+  const { minStakingPeriod } = await prompts({
+    type: "number",
+    name: "minStakingPeriod",
+    message: "Enter the minimum staking period",
+    initial: 360 * 24 * 14,
+  });
+  const { maxStakingPeriod } = await prompts({
+    type: "number",
+    name: "maxStakingPeriod",
+    message: "Enter the maximum staking period",
+    initial: 360 * 24 * 365,
+  });
+  const { epochLength } = await prompts({
+    type: "number",
+    name: "epochLength",
+    message: "Enter the epoch length",
+    initial: 180,
+  });
+
   const { amount } = await prompts({
     type: "number",
     name: "amount",
@@ -88,6 +107,24 @@ const main = async () => {
       key: keyHex,
     };
   }
+
+  genesisAccounts.push({
+    address: "0x00000000000000000000000000005374616b6572", // Staker address
+    balance: "0x0",
+    energy: 0,
+    code: "0x6060604052600256",
+    storage: {
+      // Minimum staking period
+      "0x000000000000007374616b65722d6d696e2d7374616b696e672d706572696f64":
+        "0x" + BigInt(minStakingPeriod).toString(16).padStart(64, "0"),
+      // Maximum staking period
+      "0x000000000000007374616b65722d6d61782d7374616b696e672d706572696f64":
+        "0x" + BigInt(maxStakingPeriod).toString(16).padStart(64, "0"),
+      // Epoch length
+      "0x000000000000000000000000000000000000000065706f63682d6c656e677468":
+        "0x" + BigInt(epochLength).toString(16).padStart(64, "0"),
+    },
+  });
 
   genesis.accounts = genesisAccounts;
 
