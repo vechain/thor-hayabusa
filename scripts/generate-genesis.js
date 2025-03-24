@@ -51,17 +51,23 @@ const main = async () => {
     genesis.forkConfig[config] = blockNumber;
   }
 
-  const { minStakingPeriod } = await prompts({
+  const { lowStakingPeriod } = await prompts({
     type: "number",
-    name: "minStakingPeriod",
-    message: "Enter the minimum staking period",
+    name: "lowStakingPeriod",
+    message: "Enter the low staking period",
+    initial: 360 * 24 * 7,
+  });
+  const { mediumStakingPeriod } = await prompts({
+    type: "number",
+    name: "mediumStakingPeriod",
+    message: "Enter the medium staking period",
     initial: 360 * 24 * 14,
   });
-  const { maxStakingPeriod } = await prompts({
+  const { highStakingPeriod } = await prompts({
     type: "number",
-    name: "maxStakingPeriod",
-    message: "Enter the maximum staking period",
-    initial: 360 * 24 * 365,
+    name: "highStakingPeriod",
+    message: "Enter the high staking period",
+    initial: 360 * 24 * 30,
   });
   const { epochLength } = await prompts({
     type: "number",
@@ -114,12 +120,15 @@ const main = async () => {
     energy: 0,
     code: "0x6060604052600256",
     storage: {
-      // Minimum staking period
-      "0x000000000000007374616b65722d6d696e2d7374616b696e672d706572696f64":
-        "0x" + BigInt(minStakingPeriod).toString(16).padStart(64, "0"),
-      // Maximum staking period
-      "0x000000000000007374616b65722d6d61782d7374616b696e672d706572696f64":
-        "0x" + BigInt(maxStakingPeriod).toString(16).padStart(64, "0"),
+      // Low staking period
+      "0x000000000000007374616b65722d6c6f772d7374616b696e672d706572696f64":
+        "0x" + BigInt(lowStakingPeriod).toString(16).padStart(64, "0"),
+      // Medium staking period
+      "0x000000007374616b65722d6d656469756d2d7374616b696e672d706572696f64":
+          "0x" + BigInt(mediumStakingPeriod).toString(16).padStart(64, "0"),
+      // High staking period
+      "0x0000000000007374616b65722d686967682d7374616b696e672d706572696f64":
+        "0x" + BigInt(highStakingPeriod).toString(16).padStart(64, "0"),
       // Epoch length
       "0x000000000000000000000000000000000000000065706f63682d6c656e677468":
         "0x" + BigInt(epochLength).toString(16).padStart(64, "0"),
