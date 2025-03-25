@@ -10,6 +10,7 @@ const forkConfigs = [
   "VIP214",
   "FINALITY",
   "HAYABUSA",
+  "HAYABUSA_TP"
 ];
 
 const main = async () => {
@@ -151,6 +152,17 @@ const main = async () => {
       "Enter the amount (Millions) of VET and VTHO to allocate to each Authority node",
     initial: 1000,
   });
+
+
+  genesisAccounts.push({
+    address: "0x0000000000000000000000000000506172616d73", // Params address
+    balance: "0x0",
+    energy: 0,
+    storage: {
+      "0x000000000000000000000000006d61782d626c6f636b2d70726f706f73657273": 
+      "0x" + BigInt(authorities).toString(16).padStart(64, "0"),
+    }
+  })
 
   const authorityAmount = BigInt(authorityBalance) * BigInt(1e6) * BigInt(1e18);
 
