@@ -76,6 +76,12 @@ const main = async () => {
     message: "Enter the epoch length",
     initial: 180,
   });
+  const { cooldownPeriod } = await prompts({
+    type: "number",
+    name: "cooldownPeriod",
+    message: "Enter the cooldown period",
+    initial: 180*2,
+  });
 
   const { amount } = await prompts({
     type: "number",
@@ -133,6 +139,9 @@ const main = async () => {
       // Epoch length
       "0x000000000000000000000000000000000000000065706f63682d6c656e677468":
         "0x" + BigInt(epochLength).toString(16).padStart(64, "0"),
+      // Cooldown Period
+      "0x0000000000000000000000000000000000636f6f6c646f776e2d706572696f64":
+        "0x" + BigInt(cooldownPeriod).toString(16).padStart(64, "0"),
     },
   });
 
