@@ -9,6 +9,7 @@ const forkConfigs = [
   "ETH_IST",
   "VIP214",
   "FINALITY",
+  "GALACTICA",
   "HAYABUSA",
   "HAYABUSA_TP"
 ];
