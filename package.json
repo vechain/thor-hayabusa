@@ -4,6 +4,9 @@
   "repository": "git@github.com:vechain/thor-hayabusa.git",
   "license": "MIT",
   "type": "module",
+  "scripts": {
+    "generate-genesis": "node scripts/generate-genesis.js"
+  },
   "devDependencies": {
     "prompts": "^2.4.2"
   },
