@@ -1,6 +1,6 @@
-import prompts from "prompts";
 import * as sdk from "@vechain/sdk-core";
 import * as fs from "fs";
+import prompts from "prompts";
 
 const forkConfigs = [
   "VIP191",
@@ -84,6 +84,27 @@ const main = async () => {
     initial: 180*2,
   });
 
+  const { blockInterval } = await prompts({
+    type: "number",
+    name: "blockInterval",
+    message: "Enter the block interval (in seconds)",
+    initial: 10,
+  });
+
+  const { seederInterval } = await prompts({
+    type: "number",
+    name: "seederInterval",
+    message: "Enter the seeder interval",
+    initial: 8640,
+  });
+
+  const { validatorEvictionThreshold } = await prompts({
+    type: "number",
+    name: "validatorEvictionThreshold",
+    message: "Enter the validator eviction threshold",
+    initial: 60480,
+  });
+
   const { amount } = await prompts({
     type: "number",
     name: "amount",
@@ -127,23 +148,6 @@ const main = async () => {
     balance: "0x0",
     energy: 0,
     code: "0x6060604052600256",
-    storage: {
-      // Low staking period
-      "0x000000000000007374616b65722d6c6f772d7374616b696e672d706572696f64":
-        "0x" + BigInt(lowStakingPeriod).toString(16).padStart(64, "0"),
-      // Medium staking period
-      "0x000000007374616b65722d6d656469756d2d7374616b696e672d706572696f64":
-          "0x" + BigInt(mediumStakingPeriod).toString(16).padStart(64, "0"),
-      // High staking period
-      "0x0000000000007374616b65722d686967682d7374616b696e672d706572696f64":
-        "0x" + BigInt(highStakingPeriod).toString(16).padStart(64, "0"),
-      // Epoch length
-      "0x000000000000000000000000000000000000000065706f63682d6c656e677468":
-        "0x" + BigInt(epochLength).toString(16).padStart(64, "0"),
-      // Cooldown Period
-      "0x0000000000000000000000000000000000636f6f6c646f776e2d706572696f64":
-        "0x" + BigInt(cooldownPeriod).toString(16).padStart(64, "0"),
-    },
   });
 
   genesis.accounts = genesisAccounts;
@@ -252,6 +256,17 @@ const main = async () => {
     baseGasPrice: 10000000000000,
     rewardRatio: 300000000000000000n,
     proposerEndorsement: 25000000000000000000000000n,
+  };
+
+  genesis.config = {
+    blockInterval: blockInterval,
+    epochLength: epochLength,
+    seederInterval: seederInterval,
+    validatorEvictionThreshold: validatorEvictionThreshold,
+    lowStakingPeriod: lowStakingPeriod,
+    mediumStakingPeriod: mediumStakingPeriod,
+    highStakingPeriod: highStakingPeriod,
+    cooldownPeriod: cooldownPeriod,
   };
 
   genesis.launchTime = Math.floor(Date.now() / 1000);
