@@ -259,14 +259,14 @@ const main = async () => {
   };
 
   genesis.config = {
-    blockInterval: blockInterval,
-    epochLength: epochLength,
-    seederInterval: seederInterval,
-    validatorEvictionThreshold: validatorEvictionThreshold,
-    lowStakingPeriod: lowStakingPeriod,
-    mediumStakingPeriod: mediumStakingPeriod,
-    highStakingPeriod: highStakingPeriod,
-    cooldownPeriod: cooldownPeriod,
+    blockInterval,
+    epochLength,
+    seederInterval,
+    validatorEvictionThreshold,
+    lowStakingPeriod,
+    mediumStakingPeriod,
+    highStakingPeriod,
+    cooldownPeriod,
   };
 
   genesis.launchTime = Math.floor(Date.now() / 1000);
