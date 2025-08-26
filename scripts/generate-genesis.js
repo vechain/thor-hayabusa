@@ -266,14 +266,14 @@ const main = async () => {
     const endorserChild = endorserHDKey.deriveChild(i);
     const endorserKey = endorserChild.privateKey;
     const endorserKeyHex = Buffer.of(...endorserKey).toString("hex");
-    const endorserAddress = sdk.Address.ofPrivateKey(endorserKey).toString();
+    const endorsorAddress = sdk.Address.ofPrivateKey(endorserKey).toString();
 
     const identity = await sdk.Secp256k1.generatePrivateKey();
     const identityHex = Buffer.of(...identity).toString("hex");
     
     authorityAccounts[i] = {
       masterAddress: authorityAddress,
-      endorserAddress: endorserAddress,
+      endorsorAddress: endorsorAddress,
       identity: `0x` + identityHex,
     };
 
@@ -283,12 +283,12 @@ const main = async () => {
     };
 
     endorsorAccounts[i] = {
-      address: endorserAddress,
+      address: endorsorAddress,
       key: endorserKeyHex,
     };
 
     genesis.accounts.push({
-      address: endorserAddress,
+      address: endorsorAddress,
       balance: `0x` + authorityAmount.toString(16),
       energy: `0x` + authorityAmount.toString(16),
       code: "0x6060604052600256",
