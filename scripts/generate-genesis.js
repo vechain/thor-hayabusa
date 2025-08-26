@@ -36,7 +36,7 @@ const main = async () => {
     type: "text",
     name: "extraData",
     message: "Enter the extra data for the genesis block",
-    initial: "My Custom Genesis Block",
+    initial: "Hayabusa Devnet",
   });
   genesis.extraData = extraData;
 
@@ -57,31 +57,31 @@ const main = async () => {
     type: "number",
     name: "lowStakingPeriod",
     message: "Enter the low staking period",
-    initial: 360 * 24 * 7,
+    initial: 18,
   });
   const { mediumStakingPeriod } = await prompts({
     type: "number",
     name: "mediumStakingPeriod",
     message: "Enter the medium staking period",
-    initial: 360 * 24 * 14,
+    initial: 180,
   });
   const { highStakingPeriod } = await prompts({
     type: "number",
     name: "highStakingPeriod",
     message: "Enter the high staking period",
-    initial: 360 * 24 * 30,
+    initial: 8640,
   });
   const { epochLength } = await prompts({
     type: "number",
     name: "epochLength",
     message: "Enter the epoch length",
-    initial: 180,
+    initial: 18,
   });
   const { cooldownPeriod } = await prompts({
     type: "number",
     name: "cooldownPeriod",
     message: "Enter the cooldown period",
-    initial: 180*2,
+    initial: 720,
   });
 
   const { blockInterval } = await prompts({
@@ -95,14 +95,14 @@ const main = async () => {
     type: "number",
     name: "seederInterval",
     message: "Enter the seeder interval",
-    initial: 8640,
+    initial: 720,
   });
 
   const { validatorEvictionThreshold } = await prompts({
     type: "number",
     name: "validatorEvictionThreshold",
     message: "Enter the validator eviction threshold",
-    initial: 60480,
+    initial: 8640,
   });
 
   const { amount } = await prompts({
@@ -110,18 +110,54 @@ const main = async () => {
     name: "amount",
     message:
       "Enter the amount (Millions) of VET and VTHO to allocate to the genesis accounts",
-    initial: 1000,
+    initial: 600,
+  });
+
+  const { faucetAmount } = await prompts({
+    type: "number",
+    name: "faucetAmount",
+    message: "Enter the amount (Millions) of VET and VTHO to allocate to the faucet accounts",
+    initial: 100_000_000,
+  });
+
+
+  const { rotatingValidatorsAmount } = await prompts({
+    type: "number",
+    name: "rotatingValidatorsAmount",
+    message: "Enter the amount (Millions) of VET and VTHO to allocate to each rotating validator",
+    initial: 50,
+    min: 1,
+    max: 100,
   });
 
   const balance = BigInt(amount) * BigInt(1e6) * BigInt(1e18);
+  const faucetBalance = BigInt(faucetAmount) * BigInt(1e6) * BigInt(1e18);
+  const rotatingValidatorsBalance = BigInt(rotatingValidatorsAmount) * BigInt(1e6) * BigInt(1e18);
 
   const { accounts } = await prompts({
     type: "number",
     name: "accounts",
     message: "Enter the number of genesis accounts",
-    initial: 10,
+    initial: 250,
     min: 1,
     max: 1000,
+  });
+
+  const { faucetAccounts } = await prompts({
+    type: "number",
+    name: "faucetAccounts",
+    message: "Enter the number of faucet accounts",
+    initial: 100,
+    min: 1,
+    max: 1000,
+  });
+
+  const { rotatingValidators } = await prompts({
+    type: "number",
+    name: "rotatingValidators",
+    message: "Enter the number of rotating validators",
+    initial: 2500,
+    min: 1,
   });
 
   const mnemonic = sdk.Mnemonic.of(12);
@@ -143,6 +179,44 @@ const main = async () => {
     };
   }
 
+  const faucetKeys = [];
+  const faucetMnemonic = sdk.Mnemonic.of(12);
+  const faucetHDKey = sdk.HDKey.fromMnemonic(faucetMnemonic);
+  for (let i = accounts; i < accounts + faucetAccounts; i++) {
+    const child = faucetHDKey.deriveChild(i);
+    const key = child.privateKey;
+    const keyHex = Buffer.of(...key).toString("hex");
+    const address = sdk.Address.ofPrivateKey(key);
+    genesisAccounts[i] = {
+      address: address.toString(),
+      balance: `0x` + faucetBalance.toString(16),
+      energy: `0x` + faucetBalance.toString(16),
+    };
+    faucetKeys.push({
+      address: address.toString(),
+      key: keyHex,
+    });
+  }
+
+  const rotatingValidatorsKeys = [];
+  const rotatingValidatorsMnemonic = sdk.Mnemonic.of(12);
+  const rotatingValidatorsHDKey = sdk.HDKey.fromMnemonic(rotatingValidatorsMnemonic);
+  for (let i = accounts + faucetAccounts; i < accounts + faucetAccounts + rotatingValidators; i++) {
+    const child = rotatingValidatorsHDKey.deriveChild(i);
+    const key = child.privateKey;
+    const keyHex = Buffer.of(...key).toString("hex");
+    const address = sdk.Address.ofPrivateKey(key);
+    rotatingValidatorsKeys.push({
+      address: address.toString(),
+      key: keyHex,
+    });
+    genesisAccounts[i] = {
+      address: address.toString(),
+      balance: `0x` + rotatingValidatorsBalance.toString(16),
+      energy: `0x` + rotatingValidatorsBalance.toString(16),
+    };
+  }
+
   genesisAccounts.push({
     address: "0x00000000000000000000000000005374616b6572", // Staker address
     balance: "0x0",
@@ -157,16 +231,15 @@ const main = async () => {
     name: "authorities",
     message:
       "Enter the amount of Authority nodes to allocate to the genesis block",
-    initial: 3,
+    initial: 10,
   });
   const { authorityBalance } = await prompts({
     type: "number",
     name: "authorityBalance",
     message:
       "Enter the amount (Millions) of VET and VTHO to allocate to each Authority node",
-    initial: 1000,
+    initial: 40,
   });
-
 
   genesisAccounts.push({
     address: "0x0000000000000000000000000000506172616d73", // Params address
@@ -179,22 +252,28 @@ const main = async () => {
   })
 
   const authorityAmount = BigInt(authorityBalance) * BigInt(1e6) * BigInt(1e18);
+  const authorityMnemonic = sdk.Mnemonic.of(12);
+  const endorserMnemonic = sdk.Mnemonic.of(12);
+  const authorityHDKey = sdk.HDKey.fromMnemonic(authorityMnemonic);
+  const endorserHDKey = sdk.HDKey.fromMnemonic(endorserMnemonic);
 
   for (let i = 0; i < authorities; i++) {
-    const authorityKey = await sdk.Secp256k1.generatePrivateKey();
+    const authorityChild = authorityHDKey.deriveChild(i);
+    const authorityKey = authorityChild.privateKey;
     const authorityKeyHex = Buffer.of(...authorityKey).toString("hex");
     const authorityAddress = sdk.Address.ofPrivateKey(authorityKey).toString();
 
-    const endorsorKey = await sdk.Secp256k1.generatePrivateKey();
-    const endorsorKeyHex = Buffer.of(...endorsorKey).toString("hex");
-    const endorsorAddress = sdk.Address.ofPrivateKey(endorsorKey).toString();
+    const endorserChild = endorserHDKey.deriveChild(i);
+    const endorserKey = endorserChild.privateKey;
+    const endorserKeyHex = Buffer.of(...endorserKey).toString("hex");
+    const endorserAddress = sdk.Address.ofPrivateKey(endorserKey).toString();
 
     const identity = await sdk.Secp256k1.generatePrivateKey();
     const identityHex = Buffer.of(...identity).toString("hex");
-
+    
     authorityAccounts[i] = {
       masterAddress: authorityAddress,
-      endorsorAddress: endorsorAddress,
+      endorserAddress: endorserAddress,
       identity: `0x` + identityHex,
     };
 
@@ -204,12 +283,12 @@ const main = async () => {
     };
 
     endorsorAccounts[i] = {
-      address: endorsorAddress,
-      key: endorsorKeyHex,
+      address: endorserAddress,
+      key: endorserKeyHex,
     };
 
     genesis.accounts.push({
-      address: endorsorAddress,
+      address: endorserAddress,
       balance: `0x` + authorityAmount.toString(16),
       energy: `0x` + authorityAmount.toString(16),
       code: "0x6060604052600256",
@@ -231,9 +310,12 @@ const main = async () => {
   genesis.executor = {};
   genesis.executor.approvers = [];
   const executorAccounts = [];
+  const executorMnemonic = sdk.Mnemonic.of(12);
+  const executorHDKey = sdk.HDKey.fromMnemonic(executorMnemonic);
   // create 5 executors
   for (let i = 0; i < 5; i++) {
-    const executorKey = await sdk.Secp256k1.generatePrivateKey();
+    const executorChild = executorHDKey.deriveChild(i);
+    const executorKey = executorChild.privateKey;
     const executorKeyHex = Buffer.of(...executorKey).toString("hex");
     const executorAddress = sdk.Address.ofPrivateKey(executorKey).toString();
 
@@ -295,12 +377,24 @@ const main = async () => {
     JSON.stringify(authorityKeys, null, 2),
   );
   fs.writeFileSync(
+    `${outDir}/authority-mnemonic.txt`,
+    authorityMnemonic.join(',')
+  );
+  fs.writeFileSync(
     `${outDir}/endorsor-keys.json`,
     JSON.stringify(endorsorAccounts, null, 2),
   );
   fs.writeFileSync(
+    `${outDir}/endorsor-mnemonic.txt`,
+    endorserMnemonic.join(',')
+  );
+  fs.writeFileSync(
     `${outDir}/executor-keys.json`,
     JSON.stringify(executorAccounts, null, 2),
+  );
+  fs.writeFileSync(
+    `${outDir}/executor-mnemonic.txt`,
+    executorMnemonic.join(',')
   );
   fs.writeFileSync(
     `${outDir}/genesis-keys.json`,
@@ -308,7 +402,23 @@ const main = async () => {
   );
   fs.writeFileSync(
     `${outDir}/genesis-mnemonic.txt`,
-    JSON.stringify(mnemonic.toString(" "), null, 2),
+    mnemonic.join(',')
+  );
+  fs.writeFileSync(
+    `${outDir}/faucet-keys.json`,
+    JSON.stringify(faucetKeys, null, 2),
+  );
+  fs.writeFileSync(
+    `${outDir}/faucet-mnemonic.txt`,
+    faucetMnemonic.join(',')
+  );
+  fs.writeFileSync(
+    `${outDir}/rotating-validators-keys.json`,
+    JSON.stringify(rotatingValidatorsKeys, null, 2),
+  );
+  fs.writeFileSync(
+    `${outDir}/rotating-validators-mnemonic.txt`,
+    rotatingValidatorsMnemonic.join(',')
   );
 };
 
