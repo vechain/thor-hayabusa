@@ -327,6 +327,12 @@ const main = async () => {
       address: executorAddress,
     });
 
+    genesis.accounts.push({
+      address: executorAddress,
+      balance: `0x` + authorityAmount.toString(16),
+      energy: `0x` + authorityAmount.toString(16),
+    });
+
     genesis.executor.approvers.push({
       address: executorAddress,
       identity: `0x` + identityHex,
