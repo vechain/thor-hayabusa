@@ -1,5 +1,17 @@
+import { Address, HDKey } from "@vechain/sdk-core";
 import * as fs from "fs";
 import prompts from "prompts";
+
+export const validateKeys = (keys, mnemonic) => {
+  const hdKey = HDKey.fromMnemonic(mnemonic);
+  for (let i = 0; i < keys.length; i++) {
+    const child = hdKey.deriveChild(i);
+    const addr = Address.ofPrivateKey(child.privateKey);
+    if (addr.toString() !== keys[i].address) {
+      throw new Error(`Mnemonic / key list mismatch. Key ${i} is not valid. Expected ${keys[i].address}, got ${addr.toString()}`);
+    }
+  }
+}
 
 export const loadPreviousKeys = async () => {
   const { outDir } = await prompts({
@@ -13,12 +25,15 @@ export const loadPreviousKeys = async () => {
     // Load all existing key files
     const genesisKeys = JSON.parse(fs.readFileSync(`${outDir}/genesis-keys.json`, 'utf8'));
     const genesisMnemonic = fs.readFileSync(`${outDir}/genesis-mnemonic.txt`, 'utf8').split(',');
+    validateKeys(genesisKeys, genesisMnemonic);
     
     const faucetKeys = JSON.parse(fs.readFileSync(`${outDir}/faucet-keys.json`, 'utf8'));
     const faucetMnemonic = fs.readFileSync(`${outDir}/faucet-mnemonic.txt`, 'utf8').split(',');
-    
+    validateKeys(faucetKeys, faucetMnemonic);
+
     const rotatingValidatorsKeys = JSON.parse(fs.readFileSync(`${outDir}/rotating-validators-keys.json`, 'utf8'));
     const rotatingValidatorsMnemonic = fs.readFileSync(`${outDir}/rotating-validators-mnemonic.txt`, 'utf8').split(',');
+    validateKeys(rotatingValidatorsKeys, rotatingValidatorsMnemonic);
 
     // Get amounts for recreating accounts with proper balances
     const { amount } = await prompts({

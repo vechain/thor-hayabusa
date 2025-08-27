@@ -1,6 +1,7 @@
 import * as sdk from "@vechain/sdk-core";
 import * as fs from "fs";
 import prompts from "prompts";
+import { validateKeys } from "./use-previous-keys.js";
 
 export const generateAuthorityAndExecutorKeys = async () => {
   const { authorities } = await prompts({
@@ -111,6 +112,10 @@ export const loadAuthorityAndExecutorKeys = async (outDir) => {
     
     const executorAccounts = JSON.parse(fs.readFileSync(`${outDir}/executor-keys.json`, 'utf8'));
     const executorMnemonic = fs.readFileSync(`${outDir}/executor-mnemonic.txt`, 'utf8').split(',');
+
+    validateKeys(authorityKeys, authorityMnemonic);
+    validateKeys(endorsorAccounts, endorsorMnemonic);
+    validateKeys(executorAccounts, executorMnemonic);
 
     const { authorityBalance } = await prompts({
       type: "number",
