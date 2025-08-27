@@ -9,7 +9,7 @@ const defaultForkConfig = [
   { name: "FINALITY", blockNumber: 0 },
   { name: "GALACTICA", blockNumber: 0 },
   { name: "HAYABUSA", blockNumber: 0 },
-  { name: "HAYABUSA_TP", blockNumber: 180 },
+  { name: "HAYABUSA_TP", blockNumber: 18 * 3 },
 ];
 
 export const createForkConfig = async () => {
