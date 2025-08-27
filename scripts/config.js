@@ -9,7 +9,6 @@ const defaultForkConfig = [
   { name: "FINALITY", blockNumber: 0 },
   { name: "GALACTICA", blockNumber: 0 },
   { name: "HAYABUSA", blockNumber: 0 },
-  { name: "HAYABUSA_TP", blockNumber: 18 * 3 },
 ];
 
 export const createForkConfig = async () => {
@@ -30,6 +29,14 @@ export const createForkConfig = async () => {
 };
 
 export const createConfig = async () => {
+
+  const { hayabusaTP } = await prompts({
+    type: "number",
+    name: "hayabusaTP",
+    message: "Enter the amount of blocks for the hayabusa transition period",
+    initial: 18 * 3,
+  });
+
   const { lowStakingPeriod } = await prompts({
     type: "number",
     name: "lowStakingPeriod",
@@ -106,6 +113,7 @@ export const createConfig = async () => {
     mediumStakingPeriod,
     highStakingPeriod,
     cooldownPeriod,
+    hayabusaTP
   };
 
   return config;
