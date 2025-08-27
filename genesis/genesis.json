@@ -20,9 +20,9 @@
     "mediumStakingPeriod": 180,
     "highStakingPeriod": 8640,
     "cooldownPeriod": 720,
-    "hayabusaTP": 54
+    "hayabusaTP": 18
   },
-  "launchTime": 1756296208,
+  "launchTime": 1756300957,
   "accounts": [
     {
       "address": "0x5CF3550E92971230210f6BfE8Ad9dc323f2942F7",
@@ -14458,75 +14458,75 @@
     {
       "masterAddress": "0xEe079615cf23B76EF7cC51e22A255F6Bb1AD6A7F",
       "endorsorAddress": "0xfD10722Db98C68B846823A98b77A6C9c432A24A9",
-      "identity": "0x965874346244658677bd90bcc022a4d0b934350f666c0ca8187ecb820ef8726e"
+      "identity": "0xba87aedd0f40b81bbdb07784f1324d1df23185245196c22324fb71ba6ef36afc"
     },
     {
       "masterAddress": "0x5e2D494FcbA3E0D5773cA79F2e0A04358351A858",
       "endorsorAddress": "0x52B23D192D3A5EaeC3c0Fe841bcbbB6bd06EebF1",
-      "identity": "0x6b36cbf44f72a0f5eeddbae05144bb8771b917826f0bcf653d9dc9e93ed5e2cd"
+      "identity": "0x8add35f9c18b1ef2b5b9a3a3c4ff31b7a78b46854cde167ff2461f772cf8c92a"
     },
     {
       "masterAddress": "0x9624Dc90C91e3D90fA9A7d3b15AfFec8f53e025b",
       "endorsorAddress": "0xa2742CD290c236Af2D7C2A0A80A4C99EB8C165E8",
-      "identity": "0x3f0fbb805f506927a7c53133672f80a05ad13a16b73ab683dd94cf5ef9e39350"
+      "identity": "0x1ebea9af7a6edbd10c74aa55fb6c0255b22e744224ad1a616f7a2348b7c72897"
     },
     {
       "masterAddress": "0xe1B4f78C74101A71deDdFECbe02D8Bf3065F3F7D",
       "endorsorAddress": "0x7525d6e43E469360bc135064d801CA6bCF695bc9",
-      "identity": "0xdd446cc357ff0e37606affba7c9b5956fef9bfc6a45a892a01213cfc5368f6f7"
+      "identity": "0x1ef343879c3bf3a593c52ee61fc8ff24f3726d7d98fe4d856464dd962a79bdae"
     },
     {
       "masterAddress": "0x32a0f514806FcBc791253E31c65C060049a30cAe",
       "endorsorAddress": "0x9031fF632eD8AC4Be47159Ab84273cA00d258b3b",
-      "identity": "0x960a257f0e42061d3b860f7e0e26cd46d449f3b9e814ab2665917541c8bbd2fc"
+      "identity": "0x25139dde58a77bed6034891f8fd506c519eb332d40b6380ed8a3fdf19963d42d"
     },
     {
       "masterAddress": "0x405207e1271E7165A7DEB99d73f3f6de1F41e247",
       "endorsorAddress": "0xf9ACa0Fa3Dc453c3430C4776e477E356E88A4EC3",
-      "identity": "0x2de5f5ff43f3c70a4a81f9ced34f6697397432e64c26aa512b34edce39002fd4"
+      "identity": "0x3f72e0fd453965fb1141b741a96099221ea61e4e3d13a31b3c178b7f431b42f0"
     },
     {
       "masterAddress": "0x4C0eB9A8314ecA05c8d7Ba779CC4Ff62bf00560b",
       "endorsorAddress": "0x5eE1E097196D84df34Df29B283387f1337b316fc",
-      "identity": "0x8d05b8e236c1491bf0dfa4d8ee05be0d2ffa3b3a40024c992116b205fb2eacc0"
+      "identity": "0x2150e89ccc6ff00a50e5a59aa239095852cff1ac223fc29fb13c7fa9b924c590"
     },
     {
       "masterAddress": "0x575b792FE4885eF4477d44f695d2D4e50cDC36a1",
       "endorsorAddress": "0xd5fE984d0c6b1b2FC1f542Bc04599C707A3a1AAf",
-      "identity": "0xe27fdc9d5cfa53db4ae6a91166c2c88cb09869f963e5e38ac0a0c59742b6a6a6"
+      "identity": "0x82d94c91720700e349f92be4b50924cad8db490570ffd2851ea0ccfd2e12650a"
     },
     {
       "masterAddress": "0x6C56cB8cE9724AD81b8cB3755F4C980E777062F0",
       "endorsorAddress": "0x08d863E254CfeA97da49A371C210c84cED968e09",
-      "identity": "0x1ca4598cbd51b66759785947f95140107bc59a8c091526d598bf75230b7ad25e"
+      "identity": "0x722db58d7a47649fff63dabf767794758e3f54820587fd1ff74543e7c7896d0c"
     },
     {
       "masterAddress": "0xF816975f35299410517CCfeA024abA049f9bA506",
       "endorsorAddress": "0xf63c1649CBA96affF2F2B25420898F56C18559fc",
-      "identity": "0x9bb25877cfe5ebfb8d0db679c95af71b07a02eb6cc6724a45753b4ed5d605b13"
+      "identity": "0xa0ce6e508111a441368a702f8e064944e831485c3ce46f9a27ced7c629590076"
     }
   ],
   "executor": {
     "approvers": [
       {
         "address": "0x90a3F68BE64CDd2cdDDFF6F2b424d7C64328a513",
-        "identity": "0x4e30a467c86cee054d04e44b9d8135932b1bf28d558d93448775ff89b992f8cd"
+        "identity": "0xede5fef0abe1887d941b4349d8b6c0ca75b1ae8a0b18fd36172f8646fd947f71"
       },
       {
         "address": "0x0cd8Df53B9F2CC8272fa0f05c61c12BE055FD5E2",
-        "identity": "0xe39bf0e63e450c924f52726c5da1daed06fe7230967bc9d3d986fad82ebf788d"
+        "identity": "0x10bda3d7984125f22ca14540e8a65c9046d1402877f81c8ca952b21c59d16a39"
       },
       {
         "address": "0x0f09a2a2cab3aE9e5060c18d7C5A3B068F2f954c",
-        "identity": "0xc0d277b5cb16c44578366270c47d46b962901d6b6e47ab1345f26cacd2cfdd05"
+        "identity": "0xf68866dc71133fd3228ed56c65919bbdfd8c7f2624aabcd287c4c813318b00d6"
       },
       {
         "address": "0xb248CC586bB889c6A1E5D683e2fDbF3d98334B7c",
-        "identity": "0x39c876b4b66b6215d4d1db06ed2c56fc9f6d1fdbb671a040217d98aedf32b38c"
+        "identity": "0xfdc5a49e522cc68030d81bfd1e09b8596d23e0c3c606c272564670a19c53823d"
       },
       {
         "address": "0xc48B565470F63CF8BC47166236476141FFb87Fc9",
-        "identity": "0x8578d14448ea78b33a407027fa1e1ceb5e7521eb4f492b3ed3e7169683e784ec"
+        "identity": "0xdccc47c47e4f9e3c3ab1c59739ec50fe169fc1f60913a25b96c325b20aeab57d"
       }
     ]
   },

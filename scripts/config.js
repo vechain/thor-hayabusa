@@ -34,7 +34,7 @@ export const createConfig = async () => {
     type: "number",
     name: "hayabusaTP",
     message: "Enter the amount of blocks for the hayabusa transition period",
-    initial: 18 * 3,
+    initial: 18,
   });
 
   const { lowStakingPeriod } = await prompts({
