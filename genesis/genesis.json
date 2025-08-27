@@ -12,6 +12,17 @@
     "HAYABUSA": 0,
     "HAYABUSA_TP": 180
   },
+  "config": {
+    "blockInterval": 10,
+    "epochLength": 18,
+    "seederInterval": 720,
+    "validatorEvictionThreshold": 8640,
+    "lowStakingPeriod": 18,
+    "mediumStakingPeriod": 180,
+    "highStakingPeriod": 8640,
+    "cooldownPeriod": 720
+  },
+  "launchTime": 1756287848,
   "accounts": [
     {
       "address": "0x5CF3550E92971230210f6BfE8Ad9dc323f2942F7",
@@ -14270,14 +14281,6 @@
       "code": "0x6060604052600256"
     },
     {
-      "address": "0x0000000000000000000000000000506172616d73",
-      "balance": "0x0",
-      "energy": 0,
-      "storage": {
-        "0x000000000000000000000000006d61782d626c6f636b2d70726f706f73657273": "0x000000000000000000000000000000000000000000000000000000000000000a"
-      }
-    },
-    {
       "address": "0xfD10722Db98C68B846823A98b77A6C9c432A24A9",
       "balance": "0x2116545850052128000000",
       "energy": "0x2116545850052128000000",
@@ -14441,83 +14444,89 @@
       "address": "0xc48B565470F63CF8BC47166236476141FFb87Fc9",
       "balance": "0x2116545850052128000000",
       "energy": "0x2116545850052128000000"
+    },
+    {
+      "address": "0x0000000000000000000000000000506172616d73",
+      "balance": "0x0",
+      "energy": 0,
+      "storage": {
+        "0x000000000000000000000000006d61782d626c6f636b2d70726f706f73657273": "0x000000000000000000000000000000000000000000000000000000000000000a"
+      }
     }
-    
-    
   ],
   "authority": [
     {
       "masterAddress": "0xEe079615cf23B76EF7cC51e22A255F6Bb1AD6A7F",
       "endorsorAddress": "0xfD10722Db98C68B846823A98b77A6C9c432A24A9",
-      "identity": "0x3d0e356f1dd5d5f0a4a01d43588c7c05406ac981c48d4fe3a64329340124888c"
+      "identity": "0xfdcd6ce304a94170ed06fbcd514ee5d31c80209cd6bed684f11a53fdd1a25f01"
     },
     {
       "masterAddress": "0x5e2D494FcbA3E0D5773cA79F2e0A04358351A858",
       "endorsorAddress": "0x52B23D192D3A5EaeC3c0Fe841bcbbB6bd06EebF1",
-      "identity": "0x5ce87689a23a8cfb1166c12194034dafaac19d55d306f29581c110e47b94d895"
+      "identity": "0x727c806ee989d83858ba7f3ce1e9cab8c4e5fa34daa55decf9d833cb098f206e"
     },
     {
       "masterAddress": "0x9624Dc90C91e3D90fA9A7d3b15AfFec8f53e025b",
       "endorsorAddress": "0xa2742CD290c236Af2D7C2A0A80A4C99EB8C165E8",
-      "identity": "0x8eb941287784d3098cc91fe3dda0c63824e4ed133f66a20e99c2ea0570f995f0"
+      "identity": "0xe2a23a84b84a9beb1c8d112c11f35c3a17fff2dfd697b8f8041c69fde9e9b8e3"
     },
     {
       "masterAddress": "0xe1B4f78C74101A71deDdFECbe02D8Bf3065F3F7D",
       "endorsorAddress": "0x7525d6e43E469360bc135064d801CA6bCF695bc9",
-      "identity": "0x40b705f8e5834646e2d553023d1323221d71db9cb7a50e7aa971d74e6904a571"
+      "identity": "0xfdd05e3fed801d468e06b6985b4cee420b39f1e8095e33be0db870a668b2f1b6"
     },
     {
       "masterAddress": "0x32a0f514806FcBc791253E31c65C060049a30cAe",
       "endorsorAddress": "0x9031fF632eD8AC4Be47159Ab84273cA00d258b3b",
-      "identity": "0x288101cc61499eba314bd2804a4133573f55801392dbe5b0392ed7a020c16a75"
+      "identity": "0x260242a23b1bead753bfa1643c5d2e6f7716a9ad3c78b1f4995e28ebae73c1ae"
     },
     {
       "masterAddress": "0x405207e1271E7165A7DEB99d73f3f6de1F41e247",
       "endorsorAddress": "0xf9ACa0Fa3Dc453c3430C4776e477E356E88A4EC3",
-      "identity": "0x04074952b244a53f1e4a5ae4ad005f35dcac5339893f34a44808037920de28c6"
+      "identity": "0x522d77abe65372ebd61f9598a141308d31314175c6651fd82ce4a577c1cd9014"
     },
     {
       "masterAddress": "0x4C0eB9A8314ecA05c8d7Ba779CC4Ff62bf00560b",
       "endorsorAddress": "0x5eE1E097196D84df34Df29B283387f1337b316fc",
-      "identity": "0xc4c2c790d9d74875cfa30770ccff436fa75646fbed42e2fa7e7dd9f3a5c75105"
+      "identity": "0x4557a79e65645d4bbb50cfd0d86d44f26be6f55bbb38144782199a42e5d9e102"
     },
     {
       "masterAddress": "0x575b792FE4885eF4477d44f695d2D4e50cDC36a1",
       "endorsorAddress": "0xd5fE984d0c6b1b2FC1f542Bc04599C707A3a1AAf",
-      "identity": "0x1575b8a9437975bb3faed33c4e21c51e5622e33bfe96a1fdd01b2b4448a9c508"
+      "identity": "0xa5bb6213b110bd395d70f78d221110b3a68480805c7e54ea8f98de47e3556124"
     },
     {
       "masterAddress": "0x6C56cB8cE9724AD81b8cB3755F4C980E777062F0",
       "endorsorAddress": "0x08d863E254CfeA97da49A371C210c84cED968e09",
-      "identity": "0xc6ae5d1f69b38814525121ff41c68896a572e900007c070d14c0be9f2983941d"
+      "identity": "0xd4a3325eceb5d493f7c9f6bd2ca5249130255d80c87ecc98dadd8d8173879062"
     },
     {
       "masterAddress": "0xF816975f35299410517CCfeA024abA049f9bA506",
       "endorsorAddress": "0xf63c1649CBA96affF2F2B25420898F56C18559fc",
-      "identity": "0x3fad4da3b303dd9d1f7a41e76f2932bebe9f0806dae88c1fb56a21050bc8946e"
+      "identity": "0x3fb7a74792f37ce7bd8af5de93c5281c9d4b36eb8a63603229f99fa563c73ef5"
     }
   ],
   "executor": {
     "approvers": [
       {
         "address": "0x90a3F68BE64CDd2cdDDFF6F2b424d7C64328a513",
-        "identity": "0x3a75fdcf439ce3560c28c2e50b096bc37be2e7a4a3ff6dec0557e7daac629f29"
+        "identity": "0x6a3792e2d5c73e624008b33d2cfcbf3a62c481bafb4179cf46b7f9327b83a7bd"
       },
       {
         "address": "0x0cd8Df53B9F2CC8272fa0f05c61c12BE055FD5E2",
-        "identity": "0xb64b0a12c5d95fa99c5816bcea87afba9e0eb9266fd602ec916a9e4d4f5e2446"
+        "identity": "0x960513dce979d8aedce06641d8f653585beecb02893a2a60c17003980f919cd5"
       },
       {
         "address": "0x0f09a2a2cab3aE9e5060c18d7C5A3B068F2f954c",
-        "identity": "0x88bcec6405d21b3d9c3b408438214109536066fac7c5403eccb44ffa457b1a00"
+        "identity": "0xaf65d4a5d20a817fac86ee83309e0eeebefa433b2c8812465a44692ef49ecb1a"
       },
       {
         "address": "0xb248CC586bB889c6A1E5D683e2fDbF3d98334B7c",
-        "identity": "0x070339184792a33425d08d84d5c1341fd1b74ca939a428bfd7cdc001ae8d3490"
+        "identity": "0x8019bde5886fd9603e0b298f051a6c39718a6c6f8a3a0eb58baebf8ace31a6f0"
       },
       {
         "address": "0xc48B565470F63CF8BC47166236476141FFb87Fc9",
-        "identity": "0xb1d490d852a52009cf4c4928f7c41678dfd055d8cd4a8836bc8224e9110d8bf0"
+        "identity": "0xba0349ed90441820f9eb1d42d2b49270a6b51191038b5d566feb8da98c32bb02"
       }
     ]
   },
@@ -14526,16 +14535,5 @@
     "baseGasPrice": 10000000000000,
     "rewardRatio": "300000000000000000",
     "proposerEndorsement": "25000000000000000000000000"
-  },
-  "config": {
-    "blockInterval": 10,
-    "epochLength": 18,
-    "seederInterval": 720,
-    "validatorEvictionThreshold": 8640,
-    "lowStakingPeriod": 18,
-    "mediumStakingPeriod": 180,
-    "highStakingPeriod": 8640,
-    "cooldownPeriod": 720
-  },
-  "launchTime": 1756204798
+  }
 }
