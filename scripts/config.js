@@ -34,9 +34,8 @@ export const createConfig = async () => {
     type: "number",
     name: "hayabusaTP",
     message: "Enter the amount of blocks for the hayabusa transition period",
-    initial: 18 * 3,
+    initial: 18,
   });
-
   const { lowStakingPeriod } = await prompts({
     type: "number",
     name: "lowStakingPeriod",
@@ -96,6 +95,7 @@ export const createConfig = async () => {
     { name: "cooldownPeriod", value: cooldownPeriod },
     { name: "seederInterval", value: seederInterval },
     { name: "validatorEvictionThreshold", value: validatorEvictionThreshold },
+    { name: "hayabusaTP", value: hayabusaTP },
   ];
 
   for (const { name, value } of epochValues) {
