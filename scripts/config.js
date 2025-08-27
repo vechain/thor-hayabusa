@@ -82,6 +82,21 @@ export const createConfig = async () => {
     initial: 8640,
   });
 
+  const epochValues = [
+    { name: "lowStakingPeriod", value: lowStakingPeriod },
+    { name: "mediumStakingPeriod", value: mediumStakingPeriod },
+    { name: "highStakingPeriod", value: highStakingPeriod },
+    { name: "cooldownPeriod", value: cooldownPeriod },
+    { name: "seederInterval", value: seederInterval },
+    { name: "validatorEvictionThreshold", value: validatorEvictionThreshold },
+  ];
+
+  for (const { name, value } of epochValues) {
+    if (value % epochLength !== 0) {
+      throw new Error(`${name} must be a multiple of epoch length`);
+    }
+  }
+
   const config = {
     blockInterval,
     epochLength,
