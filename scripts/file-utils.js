@@ -13,8 +13,8 @@ export const saveAllKeys = async (
   const { outDir } = await prompts({
     type: "text",
     name: "outDir",
-    message: "Enter the output directory",
-    initial: "./genesis",
+    message: "Enter the keysoutput directory",
+    initial: "./keys",
   });
 
   if (!fs.existsSync(outDir)) {

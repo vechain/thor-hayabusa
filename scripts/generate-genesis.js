@@ -1,10 +1,10 @@
-import * as sdk from "@vechain/sdk-core";
 import prompts from "prompts";
 import { createConfig, createForkConfig } from "./config.js";
 import { loadPreviousKeys } from "./use-previous-keys.js";
 import { generateNewKeys } from "./generate-new-keys.js";
 import { generateAuthorityAndExecutorKeys, loadAuthorityAndExecutorKeys } from "./authority-executor.js";
 import { saveAllKeys, saveGenesis, createGenesisAccounts } from "./file-utils.js";
+import * as fs from "fs";
 
 const main = async () => {
   console.log("🚀 VeChain Genesis Builder");
@@ -61,7 +61,7 @@ const main = async () => {
       type: "text",
       name: "outDir",
       message: "Enter the directory containing existing keys",
-      initial: "./custom-net",
+      initial: "./keys",
     });
     authorityData = await loadAuthorityAndExecutorKeys(outDir);
   } else {
@@ -118,7 +118,7 @@ const main = async () => {
     executor: authorityData.mnemonics.executor,
   };
 
-  const outDir = await saveAllKeys(
+  await saveAllKeys(
     keyData.genesisKeys,
     keyData.faucetKeys,
     keyData.rotatingValidatorsKeys,
@@ -127,6 +127,17 @@ const main = async () => {
     authorityData.executorAccounts,
     allMnemonics
   );
+
+  const { outDir } = await prompts({
+    type: "text",
+    name: "outDir",
+    message: "Enter the genesis output directory",
+    initial: "./genesis",
+  });
+
+  if (!fs.existsSync(outDir)) {
+    fs.mkdirSync(outDir, { recursive: true });
+  }
 
   saveGenesis(genesis, outDir);
 
