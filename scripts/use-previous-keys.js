@@ -18,7 +18,7 @@ export const loadPreviousKeys = async () => {
     type: "text",
     name: "outDir",
     message: "Enter the directory containing existing keys",
-    initial: "./custom-net",
+    initial: "./keys",
   });
 
   try {
