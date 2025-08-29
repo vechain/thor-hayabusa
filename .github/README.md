@@ -20,8 +20,9 @@ The **Hayabusa hardfork** marks an important milestone in our project’s evolut
 - **[Genesis Instructions](genesis.md)** 
   Step-by-step instructions for working with genesis data.
 
-- **[VIPs] 
-  TODO
+- **VIPs**
+  - [VIP-253](https://github.com/vechain/VIPs/blob/master/vips/VIP-253.md) - Upgrade consensus to Delegated Proof of Stake (DPoS)
+  - [VIP-254](https://github.com/vechain/VIPs/blob/master/vips/VIP-254.md) - Upgrade tokenomics of VeChain Delegated Proof of Stake (DPoS)
 
 - **Additional resources**  *(coming soon)* 
   More artifacts and support materials will be added as the project evolves.
