@@ -107,11 +107,6 @@ export const createGenesisAccounts = (accounts, authorityAmount, authorityAccoun
       address: endorsorAccounts[i].address,
       balance: `0x` + authorityAmount.toString(16),
       energy: `0x` + authorityAmount.toString(16),
-      code: "0x6060604052600256",
-      storage: {
-        ["0x0000000000000000000000000000000000000000000000000000000000000001"]:
-          "0x0000000000000000000000000000000000000000000000000000000000000002",
-      },
     });
 
     genesisAccounts.push({
