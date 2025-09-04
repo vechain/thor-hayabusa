@@ -1,6 +1,6 @@
 {
   "gasLimit": 40000000,
-  "extraData": "Hayabusa Devnet 20250901-27c4f28",
+  "extraData": "Hayabusa Devnet 0901-27c4f28",
   "forkConfig": {
     "VIP191": 0,
     "ETH_CONST": 0,
