@@ -1,6 +1,10 @@
 {
   "gasLimit": 40000000,
+<<<<<<< HEAD
   "extraData": "v241 20251108 715d423",
+=======
+  "extraData": "Hayabusa Devnet 1002.3ad5e18",
+>>>>>>> @{-1}
   "forkConfig": {
     "VIP191": 0,
     "ETH_CONST": 0,
