@@ -99,7 +99,6 @@ const main = async () => {
   };
 
   genesis.params = {
-    executorAddress: "0x0000000000000000000000004578656375746f72",
     baseGasPrice: 10000000000000,
     rewardRatio: 300000000000000000n,
     proposerEndorsement: 25000000000000000000000000n,
