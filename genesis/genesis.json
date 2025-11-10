@@ -1,6 +1,6 @@
 {
   "gasLimit": 40000000,
-  "extraData": "Hayabusa Devnet 1002.3ad5e18",
+  "extraData": "v241 20251108 715d423",
   "forkConfig": {
     "VIP191": 0,
     "ETH_CONST": 0,
@@ -14531,7 +14531,6 @@
     ]
   },
   "params": {
-    "executorAddress": "0x0000000000000000000000004578656375746f72",
     "baseGasPrice": 10000000000000,
     "rewardRatio": "300000000000000000",
     "proposerEndorsement": "25000000000000000000000000"
